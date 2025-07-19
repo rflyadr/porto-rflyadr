@@ -855,10 +855,15 @@
               var email = document.getElementById('email').value;
               var subject = document.getElementById('subject').value;
               var message = document.getElementById('message').value;
-              var waMsg = `Halo Rafly, saya ${name} (${email})%0ASubject: ${subject}%0A${message}`;
-              var url = `https://wa.me/6283100592719?text=${encodeURI(waMsg)}`;
+            
+              var waMsg =
+                `Subject: ${subject}\n` +
+                `Name: ${name} (${email})\n` +
+                `Message:\n${message}`;
+            
+              var url = `https://wa.me/6283100592719?text=${encodeURIComponent(waMsg)}`;
               window.open(url, '_blank');
-              return false; // Prevent default form submit
+              return false;
             }
           </script>
         </div>
