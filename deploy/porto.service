@@ -8,7 +8,8 @@ User=porto
 Group=porto
 WorkingDirectory=/var/www/porto
 EnvironmentFile=/etc/porto.env
-ExecStart=/var/www/porto/node_modules/.bin/next start -H 127.0.0.1 -p 3000
+# PORT comes from /etc/porto.env (default 3999 if unset).
+ExecStart=/bin/sh -c '/var/www/porto/node_modules/.bin/next start -H 127.0.0.1 -p ${PORT:-3999}'
 Restart=always
 RestartSec=3
 

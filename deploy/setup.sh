@@ -3,7 +3,8 @@
 #   sudo bash deploy/setup.sh
 set -euo pipefail
 
-DOMAIN=swipmi.com
+DOMAIN="${DOMAIN:-swipmi.com}"
+PORT="${PORT:-3999}"
 APP_DIR=/var/www/porto
 DATA_DIR=/var/lib/porto
 BACKUP_DIR=/var/backups/porto
@@ -35,6 +36,7 @@ if [ ! -f /etc/porto.env ]; then
   umask 077
   cat > /etc/porto.env <<ENV
 NODE_ENV=production
+PORT=${PORT:-3999}
 ADMIN_PASSWORD=$PW
 SESSION_SECRET=$(openssl rand -hex 32)
 DATA_DIR=$DATA_DIR
