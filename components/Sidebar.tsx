@@ -1,7 +1,7 @@
 'use client';
 
 import { useContent } from './ContentProvider';
-import { Media } from './Media';
+import { Media, withBase } from './Media';
 
 const nav = [
   ['Home', '#hero'], ['About', '#about'], ['Resume', '#resume'],
@@ -15,12 +15,12 @@ export default function Sidebar() {
   return (
     <header id="header" className="header d-flex align-items-center fixed-top">
       <div className="container-fluid position-relative d-flex align-items-center justify-content-between">
-        <a href="/" className="logo d-flex align-items-center" />
+        <a href={withBase('/')} className="logo d-flex align-items-center" />
         <nav id="navmenu" className="navmenu">
           <div className="profile-img">
             <Media path={hero.image} className="img-fluid rounded-circle" />
           </div>
-          <a href="/" className="logo d-flex align-items-center justify-content-center active">
+          <a href={withBase('/')} className="logo d-flex align-items-center justify-content-center active">
             <h1 className="sitename">{settings.name}</h1>
           </a>
           <div className="social-links text-center">
@@ -30,7 +30,7 @@ export default function Sidebar() {
           </div>
           <ul>
             {nav.map(([label, href]) => (
-              <li key={href}><a href={`/${href}`} onClick={() => document.body.classList.remove('mobile-nav-active')}>{label}</a></li>
+              <li key={href}><a href={withBase(`/${href}`)} onClick={() => document.body.classList.remove('mobile-nav-active')}>{label}</a></li>
             ))}
           </ul>
           <i className="mobile-nav-toggle d-xl-none bi bi-list" onClick={toggle}></i>

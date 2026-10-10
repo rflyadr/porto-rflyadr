@@ -5,6 +5,12 @@ import { getContent } from '@/lib/store';
 
 export const dynamic = 'force-dynamic';
 
+// The static export needs every project page listed up front.
+export async function generateStaticParams() {
+  const { projects } = await getContent();
+  return projects.map((p) => ({ id: p.slug }));
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
   const p = (await getContent()).projects.find((x) => x.slug === id);

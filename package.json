@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "sandbox": "ampx sandbox",
-    "backup": "bash scripts/backup-local.sh"
+    "backup": "bash scripts/backup-local.sh",
+    "build:static": "bash scripts/build-static.sh"
   },
   "dependencies": {
     "aos": "^2.3.4",

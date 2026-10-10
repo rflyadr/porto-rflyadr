@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import type { Project } from '@/lib/defaults';
 import { Lines } from './Lines';
+import { withBase } from './Media';
 
 export default function ProjectDetail({ project: p, nextSlug }: { project: Project; nextSlug: string }) {
   const images = [p.image, ...p.gallery].filter(Boolean);
@@ -45,8 +46,8 @@ export default function ProjectDetail({ project: p, nextSlug }: { project: Proje
           <h1 className="mb-2 mb-lg-0">{p.title}</h1>
           <nav className="breadcrumbs">
             <ol>
-              <li><a href="/">Home</a></li>
-              <li><a href="/#portfolio">Portfolio</a></li>
+              <li><a href={withBase('/')}>Home</a></li>
+              <li><a href={withBase('/#portfolio')}>Portfolio</a></li>
               <li className="current">{p.title}</li>
             </ol>
           </nav>
@@ -63,7 +64,7 @@ export default function ProjectDetail({ project: p, nextSlug }: { project: Proje
                 {main && (
                   <div className="main-image" onMouseEnter={() => setPaused(true)}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={main} alt={p.title} className="img-fluid" />
+                    <img src={withBase(main)} alt={p.title} className="img-fluid" />
                   </div>
                 )}
 
@@ -71,7 +72,7 @@ export default function ProjectDetail({ project: p, nextSlug }: { project: Proje
                   <div className="thumbnail-grid">
                     {images.map((src, i) => (
                       /* eslint-disable-next-line @next/next/no-img-element */
-                      <img key={`${src}-${i}`} src={src} alt=""
+                      <img key={`${src}-${i}`} src={withBase(src)} alt=""
                         className={`img-fluid${i === active ? ' is-active' : ''}`}
                         title={p.imageNotes?.[src] ? 'Click to read about this screen' : undefined}
                         onClick={() => { setPaused(true); setActive(i); }} />
@@ -165,8 +166,8 @@ export default function ProjectDetail({ project: p, nextSlug }: { project: Proje
                         return b.src ? (
                           <figure className="project-block-image" key={b.id}>
                             {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <a href={b.src} className="glightbox" data-gallery={`project-${i}`}>
-                              <img src={b.src} alt={b.caption || p.title} className="img-fluid" />
+                            <a href={withBase(b.src)} className="glightbox" data-gallery={`project-${i}`}>
+                              <img src={withBase(b.src)} alt={b.caption || p.title} className="img-fluid" />
                             </a>
                             {b.caption && <figcaption>{b.caption}</figcaption>}
                           </figure>
@@ -177,8 +178,8 @@ export default function ProjectDetail({ project: p, nextSlug }: { project: Proje
                           <div className="project-block-gallery-grid">
                             {b.images.map((src, n) => (
                               /* eslint-disable-next-line @next/next/no-img-element */
-                              <a href={src} className="glightbox" data-gallery={`project-${i}`} key={`${src}-${n}`}>
-                                <img src={src} alt={b.caption || p.title} className="img-fluid" />
+                              <a href={withBase(src)} className="glightbox" data-gallery={`project-${i}`} key={`${src}-${n}`}>
+                                <img src={withBase(src)} alt={b.caption || p.title} className="img-fluid" />
                               </a>
                             ))}
                           </div>
@@ -199,9 +200,9 @@ export default function ProjectDetail({ project: p, nextSlug }: { project: Proje
                 )}
 
                 <div className="cta-buttons" data-aos="fade-up" data-aos-delay="400">
-                  <a href="/#portfolio" className="btn-view-project">Back to Portfolio</a>
+                  <a href={withBase('/#portfolio')} className="btn-view-project">Back to Portfolio</a>
                   {nextSlug !== p.slug && (
-                    <a href={`/portfolio/${nextSlug}`} className="btn-next-project">
+                    <a href={withBase(`/portfolio/${nextSlug}`)} className="btn-next-project">
                       Next Project <i className="bi bi-arrow-right"></i>
                     </a>
                   )}

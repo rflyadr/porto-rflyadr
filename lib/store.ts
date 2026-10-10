@@ -1,6 +1,6 @@
 import 'server-only';
 import Database from 'better-sqlite3';
-import { mkdirSync } from 'fs';
+import { mkdirSync, readFileSync } from 'fs';
 import path from 'path';
 import { defaultContent, migrateProject, type SiteContent } from './defaults';
 
@@ -46,7 +46,26 @@ function merge(saved: Partial<SiteContent>): SiteContent {
   };
 }
 
+/**
+ * Static export mode (GitHub Pages): read the committed JSON instead of
+ * SQLite, so the site builds with no database and no server.
+ */
+export const STATIC_MODE = process.env.STATIC_EXPORT === '1';
+
+let staticCache: SiteContent | undefined;
+function readStatic(): SiteContent {
+  if (staticCache) return staticCache;
+  try {
+    const file = path.join(process.cwd(), 'content', 'site.json');
+    staticCache = merge(JSON.parse(readFileSync(file, 'utf8')));
+  } catch {
+    staticCache = defaultContent;
+  }
+  return staticCache;
+}
+
 export async function getContent(): Promise<SiteContent> {
+  if (STATIC_MODE) return readStatic();
   const row = open().prepare('SELECT value FROM kv WHERE key = ?').get('content') as { value: string } | undefined;
   return row ? merge(JSON.parse(row.value)) : defaultContent;
 }

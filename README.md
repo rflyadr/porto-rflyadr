@@ -23,3 +23,21 @@ npm ci && npm run build
 DATA_DIR=/var/lib/porto npm start     # set ADMIN_PASSWORD, SESSION_SECRET in the environment
 ```
 Back up `DATA_DIR`.
+
+## Two deployments from one codebase
+
+| | Live site | Static copy |
+|---|---|---|
+| Where | EC2 (`swipmi.com`) | GitHub Pages (`rflyadr.github.io/porto-rflyadr`) |
+| Content | SQLite, edited at `/admin` | `content/site.json`, committed |
+| Admin / uploads | yes | no |
+
+### Updating the static copy
+1. Open `https://swipmi.com/api/export` and copy the JSON.
+2. Paste it into `content/site.json`.
+3. Commit and push — GitHub Actions rebuilds and publishes Pages.
+
+Build it locally with `PAGES_BASE_PATH=/porto-rflyadr npm run build:static` (output in `out/`).
+
+**Images:** files uploaded through the admin live on the server, not in the repo, so
+they will not appear in the static copy. Images under `public/assets/` work in both.

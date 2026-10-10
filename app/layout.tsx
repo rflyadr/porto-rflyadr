@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import { getContent } from '@/lib/store';
 
-export const dynamic = 'force-dynamic'; // content comes from the store on every request
+// Re-read content per request. scripts/build-static.sh strips this line for
+// the static export, where there is no server to re-read anything.
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata(): Promise<Metadata> {
   const { settings } = await getContent();

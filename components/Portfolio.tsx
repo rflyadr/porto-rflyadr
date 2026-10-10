@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useContent } from './ContentProvider';
+import { withBase } from './Media';
 
 export default function Portfolio() {
   const { portfolio, portfolioFilters, projects } = useContent();
@@ -46,7 +47,7 @@ export default function Portfolio() {
                     {/* A project may have no image yet; never render src="". */}
                     {p.image
                       // eslint-disable-next-line @next/next/no-img-element
-                      ? <img src={p.image} className="img-fluid" alt={p.title} loading="lazy" />
+                      ? <img src={withBase(p.image)} className="img-fluid" alt={p.title} loading="lazy" />
                       : <div className="entry-image-placeholder" aria-hidden="true"><i className="bi bi-image"></i></div>}
                     <span className={`project-kind project-kind-${p.kind ?? 'personal'}`}>
                       {p.kind === 'professional' ? 'Professional' : 'Personal'}
@@ -62,14 +63,14 @@ export default function Portfolio() {
                         )}
                         <div className="entry-links">
                           {p.image && (
-                            <a href={p.image} className="glightbox" data-gallery="portfolio-gallery"
+                            <a href={withBase(p.image)} className="glightbox" data-gallery="portfolio-gallery"
                               data-glightbox={`title: ${p.title}; description: ${p.description}`}>
                               <i className="bi bi-arrows-angle-expand"></i>
                             </a>
                           )}
                           {/* Opens in a new tab so the visitor keeps their place
                               in the portfolio grid. */}
-                          <a href={`/portfolio/${p.slug}`} target="_blank" rel="noopener"
+                          <a href={withBase(`/portfolio/${p.slug}`)} target="_blank" rel="noopener"
                             title="View details (opens in a new tab)">
                             <i className="bi bi-arrow-right"></i>
                           </a>
