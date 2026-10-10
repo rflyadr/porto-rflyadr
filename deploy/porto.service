@@ -1,0 +1,23 @@
+[Unit]
+Description=Portfolio (Next.js)
+After=network.target
+
+[Service]
+Type=simple
+User=porto
+Group=porto
+WorkingDirectory=/var/www/porto
+EnvironmentFile=/etc/porto.env
+ExecStart=/var/www/porto/node_modules/.bin/next start -H 127.0.0.1 -p 3000
+Restart=always
+RestartSec=3
+
+# Hardening: the app may only write to its data folder
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/porto /var/www/porto/.next/cache
+
+[Install]
+WantedBy=multi-user.target

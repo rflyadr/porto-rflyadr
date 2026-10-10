@@ -1,0 +1,474 @@
+/* Admin area styles. Deliberately separate from the portfolio template CSS. */
+:root {
+  --admin-bg: #f4f6fa;
+  --admin-surface: #ffffff;
+  --admin-border: #e3e7ef;
+  --admin-text: #1d2433;
+  --admin-muted: #6b7384;
+  --admin-accent: #2f6fed;
+  --admin-nav-bg: #141a26;
+  --admin-nav-text: #aab3c5;
+  --admin-nav-active: #ffffff;
+  --admin-sidebar-w: 248px;
+}
+
+body.admin-page {
+  margin: 0;
+  background: var(--admin-bg);
+  color: var(--admin-text);
+  font-family: "Segoe UI", Roboto, system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+}
+
+/* ---- Sidebar ---- */
+.admin-sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: var(--admin-sidebar-w);
+  background: var(--admin-nav-bg);
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  z-index: 1040;
+  transition: transform .25s ease;
+}
+
+.admin-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 20px 18px;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: .2px;
+}
+
+.admin-brand i { font-size: 1.25rem; color: var(--admin-accent); }
+
+.admin-nav-label {
+  padding: 14px 20px 6px;
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: #5d6578;
+}
+
+.admin-nav a {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 10px 20px;
+  color: var(--admin-nav-text);
+  text-decoration: none;
+  border-left: 3px solid transparent;
+  transition: background .15s, color .15s;
+}
+
+.admin-nav a:hover { background: rgba(255, 255, 255, .05); color: #fff; }
+
+.admin-nav a.active {
+  color: var(--admin-nav-active);
+  background: rgba(47, 111, 237, .14);
+  border-left-color: var(--admin-accent);
+  font-weight: 500;
+}
+
+.admin-nav a i { width: 18px; font-size: 1rem; text-align: center; }
+
+.admin-sidebar-footer {
+  margin-top: auto;
+  padding: 16px 20px 0;
+  border-top: 1px solid rgba(255, 255, 255, .08);
+}
+
+.admin-sidebar-footer a,
+.admin-sidebar-footer button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 0;
+  background: none;
+  border: 0;
+  color: var(--admin-nav-text);
+  text-decoration: none;
+  font-size: .9rem;
+}
+
+.admin-sidebar-footer a:hover,
+.admin-sidebar-footer button:hover { color: #fff; }
+
+/* ---- Main area ----
+   The admin is a fixed-height app shell: the page itself never scrolls.
+   Top bar and save bar stay put, and the card area between them takes the
+   remaining height. Individual cards scroll inside themselves instead. */
+.admin-main {
+  margin-left: var(--admin-sidebar-w);
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.admin-topbar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--admin-surface);
+  border-bottom: 1px solid var(--admin-border);
+  padding: 14px 24px;
+  z-index: 1030;
+}
+
+.admin-topbar h1 { font-size: 1.05rem; font-weight: 600; margin: 0; }
+.admin-topbar .admin-hint { color: var(--admin-muted); font-size: .85rem; }
+
+.admin-burger {
+  display: none;
+  background: none;
+  border: 1px solid var(--admin-border);
+  border-radius: 6px;
+  padding: 4px 9px;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+/* The card area fills the space between the bars and uses the full width. */
+.admin-content {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 20px 24px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0 20px;
+  align-items: stretch;
+}
+
+@media (min-width: 1200px) {
+  .admin-content { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1800px) {
+  .admin-content { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+.admin-card-wide { grid-column: 1 / -1; }
+
+/* A column stacks its cards. By default it scrolls as a unit; a column that
+   holds a `fill` card instead gives that card the leftover height and lets the
+   card scroll its own body, so there is never a scrollbar inside a scrollbar. */
+.admin-col {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.admin-col:has(> .admin-card-fill) { overflow: hidden; }
+
+/* The last card in a column has nothing below it, so drop its bottom gap. */
+.admin-col > .admin-card:last-child { margin-bottom: 0; }
+
+/* Explicit columns: each child of .admin-cols is a column that stacks its own
+   cards. Pages choose how many columns and how wide each one is. */
+.admin-cols {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0 20px;
+  align-items: stretch;
+  min-height: 0;
+}
+
+@media (min-width: 1200px) {
+  .admin-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .admin-cols-1-2 { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); }
+  .admin-cols-2-1 { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
+}
+
+@media (min-width: 1500px) {
+  .admin-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .admin-cols-1-1-2 { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 2fr); }
+  .admin-cols-1-2-2 { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 2fr); }
+}
+
+@media (min-width: 1200px) and (max-width: 1499px) {
+  .admin-cols-3, .admin-cols-1-1-2, .admin-cols-1-2-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Below the 2-column breakpoint the shell goes back to normal page scrolling,
+   because columns side by side would be unusable on a phone. */
+@media (max-width: 1199px) {
+  .admin-main { height: auto; overflow: visible; }
+  .admin-topbar { position: sticky; top: 0; }
+  .admin-content { display: block; }
+  .admin-col { overflow: visible; }
+}
+
+.admin-card {
+  background: var(--admin-surface);
+  border: 1px solid var(--admin-border);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.admin-card > h2 {
+  font-size: .95rem;
+  font-weight: 600;
+  margin: 0 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--admin-border);
+}
+
+/* A card that owns its column: the heading stays put and only the body
+   scrolls, so the page never grows taller than the viewport. */
+@media (min-width: 1200px) {
+  .admin-card-fill {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    flex: 1 1 auto;
+    overflow: hidden;
+  }
+
+  .admin-card-fill > h2 { flex: 0 0 auto; }
+
+  .admin-card-fill > .admin-card-body {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    padding-right: 6px;
+    margin-right: -6px;
+  }
+}
+
+/* Keep scrollbars unobtrusive. */
+.admin-col::-webkit-scrollbar,
+.admin-card-fill > .admin-card-body::-webkit-scrollbar { width: 10px; }
+
+.admin-col::-webkit-scrollbar-thumb,
+.admin-card-fill > .admin-card-body::-webkit-scrollbar-thumb {
+  background: #cfd6e4;
+  border-radius: 6px;
+  border: 3px solid var(--admin-surface);
+}
+
+.admin-col::-webkit-scrollbar-track,
+.admin-card-fill > .admin-card-body::-webkit-scrollbar-track { background: transparent; }
+
+.admin-list-item {
+  background: #fafbfd;
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  padding: 14px;
+  margin-bottom: 10px;
+}
+
+/* Short list rows (e.g. social links) can sit side by side instead of
+   stacking, so the card stays compact. */
+.admin-list-grid { display: grid; gap: 0 12px; }
+
+@media (min-width: 900px) {
+  .admin-list-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .admin-list-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* A sub-heading inside a card, for grouping related fields. */
+.admin-card-section {
+  font-size: .85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--admin-muted);
+  margin: 26px 0 12px;
+  padding-top: 18px;
+  border-top: 1px solid var(--admin-border);
+}
+
+/* Uploaded gallery images: drag a tile to reorder. */
+.admin-gallery-item {
+  position: relative;
+  cursor: grab;
+  border-radius: 6px;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  transition: outline-color .12s, opacity .12s;
+}
+
+.admin-gallery-item:active { cursor: grabbing; }
+
+.admin-gallery-item.is-dragging { opacity: .4; }
+
+/* The tile the dragged image would land on. */
+.admin-gallery-item.is-over { outline-color: var(--admin-accent); }
+
+.admin-gallery-remove {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  padding: 0 5px;
+  font-size: .7rem;
+  line-height: 1.4;
+}
+
+.admin-gallery-replace {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  background: rgba(20, 26, 38, .72);
+  color: #fff;
+  font-size: .72rem;
+  cursor: pointer;
+}
+
+.admin-gallery-replace:hover { background: var(--admin-accent); }
+
+.admin-gallery-pos {
+  position: absolute;
+  bottom: 2px;
+  left: 2px;
+  min-width: 17px;
+  padding: 0 4px;
+  border-radius: 4px;
+  background: rgba(20, 26, 38, .72);
+  color: #fff;
+  font-size: .68rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* Paste / drop target for screenshots. */
+.admin-dropzone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+  padding: 10px 12px;
+  border: 1px dashed var(--admin-border);
+  border-radius: 8px;
+  background: #fafbfd;
+  color: var(--admin-muted);
+  font-size: .82rem;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  transition: border-color .15s, background .15s, color .15s;
+}
+
+.admin-dropzone i { font-size: 1rem; }
+
+.admin-dropzone:hover { border-color: #b9c3d6; }
+
+.admin-dropzone.is-armed,
+.admin-dropzone.is-over {
+  border-color: var(--admin-accent);
+  border-style: solid;
+  background: rgba(47, 111, 237, .06);
+  color: var(--admin-accent);
+}
+
+/* ---- Sticky save bar ---- */
+.admin-savebar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--admin-surface);
+  border-top: 1px solid var(--admin-border);
+  padding: 14px 24px;
+}
+
+@media (max-width: 1199px) {
+  .admin-savebar { position: sticky; bottom: 0; }
+}
+
+.admin-status { font-size: .85rem; color: var(--admin-muted); }
+.admin-status.error { color: #c22; }
+.admin-status.ok { color: #1a7f4b; }
+
+/* ---- Login ---- */
+.admin-login {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+
+.admin-login form {
+  width: 100%;
+  max-width: 360px;
+  background: var(--admin-surface);
+  border: 1px solid var(--admin-border);
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: 0 6px 24px rgba(20, 26, 38, .06);
+}
+
+/* ---- Mobile ---- */
+@media (max-width: 900px) {
+  .admin-sidebar { transform: translateX(-100%); }
+  body.admin-nav-open .admin-sidebar { transform: none; }
+  .admin-main { margin-left: 0; }
+  .admin-burger { display: block; }
+  body.admin-nav-open::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 26, 38, .45);
+    z-index: 1035;
+  }
+}
+
+/* ---- Icon picker ---- */
+.icon-picker-pop {
+  position: absolute;
+  z-index: 1050;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 4px;
+  padding: 10px;
+  background: var(--admin-surface);
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  box-shadow: 0 8px 28px rgba(20, 26, 38, .14);
+}
+
+.icon-picker-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(38px, 1fr));
+  gap: 4px;
+  max-height: 232px;
+  overflow-y: auto;
+}
+
+.icon-picker-cell {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: var(--admin-text);
+  font-size: 1.05rem;
+  cursor: pointer;
+}
+
+.icon-picker-cell:hover { background: #eef2fb; border-color: var(--admin-border); }
+
+.icon-picker-cell.selected {
+  background: rgba(47, 111, 237, .12);
+  border-color: var(--admin-accent);
+  color: var(--admin-accent);
+}

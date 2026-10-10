@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Portfolio Details - Style Bootstrap Template</title>
+  <title>Portfolio Details - Rafly Adriansyah</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -51,13 +51,13 @@
       <nav id="navmenu" class="navmenu">
 
         <div class="profile-img">
-          <img src="assets/img/profile/profile-square-1.webp" alt="" class="img-fluid rounded-circle">
+          <img src="assets/img/profile/profile-square-1.jpg" alt="" class="img-fluid rounded-circle">
         </div>
 
         <a href="index.html" class="logo d-flex align-items-center justify-content-center">
           <!-- Uncomment the line below if you also wish to use an image logo -->
           <!-- <img src="assets/img/logo.webp" alt=""> -->
-          <h1 class="sitename">Alex Smith</h1>
+          <h1 class="sitename">Rafly Adriansyah</h1>
         </a>
 
         <div class="social-links text-center">
@@ -69,11 +69,11 @@
         </div>
 
         <ul>
-          <li><a href="#hero">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#resume">Resume</a></li>
-          <li><a href="#portfolio">Portfolio</a></li>
-          <li><a href="#services">Services</a></li>
+          <li><a href="index.html#hero">Home</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#resume">Resume</a></li>
+          <li><a href="index.html#portfolio">Portfolio</a></li>
+          <li><a href="index.html#services">Services</a></li>
           <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="#">Dropdown 1</a></li>
@@ -91,7 +91,7 @@
               <li><a href="#">Dropdown 4</a></li>
             </ul>
           </li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
@@ -148,46 +148,13 @@
                       }
                     }
                   </script>
-                  <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                      <img src="assets/img/portfolio/portfolio-5.webp" alt="Portfolio Image" class="img-fluid">
-                    </div>
-                    <div class="swiper-slide">
-                      <img src="assets/img/portfolio/portfolio-7.webp" alt="Portfolio Image" class="img-fluid">
-                    </div>
-                    <div class="swiper-slide">
-                      <img src="assets/img/portfolio/portfolio-8.webp" alt="Portfolio Image" class="img-fluid">
-                    </div>
-                  </div>
+                  <div class="swiper-wrapper" id="pd-slides"></div>
                   <div class="swiper-button-prev"></div>
                   <div class="swiper-button-next"></div>
                 </div>
               </div>
 
-              <div class="thumbnail-grid" data-aos="fade-up" data-aos-delay="200">
-                <div class="row g-2 mt-3">
-                  <div class="col-3">
-                    <img src="assets/img/portfolio/portfolio-4.webp" alt="Gallery Image" class="img-fluid glightbox">
-                  </div>
-                  <div class="col-3">
-                    <img src="assets/img/portfolio/portfolio-6.webp" alt="Gallery Image" class="img-fluid glightbox">
-                  </div>
-                  <div class="col-3">
-                    <img src="assets/img/portfolio/portfolio-11.webp" alt="Gallery Image" class="img-fluid glightbox">
-                  </div>
-                  <div class="col-3">
-                    <img src="assets/img/portfolio/portfolio-12.webp" alt="Gallery Image" class="img-fluid glightbox">
-                  </div>
-                </div>
-              </div>
-
-              <div class="tech-stack-badges" data-aos="fade-up" data-aos-delay="300">
-                <span>Angular</span>
-                <span>Express.js</span>
-                <span>PostgreSQL</span>
-                <span>GraphQL</span>
-                <span>Firebase</span>
-              </div>
+              <div class="tech-stack-badges" id="pd-tech" data-aos="fade-up" data-aos-delay="300"></div>
             </div>
           </div>
 
@@ -195,31 +162,24 @@
             <div class="portfolio-details-content">
               <div class="project-meta">
                 <div class="badge-wrapper">
-                  <span class="project-badge">UX/UI Design</span>
+                  <span class="project-badge" id="pd-category"></span>
                 </div>
                 <div class="date-client">
                   <div class="meta-item">
                     <i class="bi bi-calendar-check"></i>
-                    <span>September 2024</span>
+                    <span id="pd-date"></span>
                   </div>
                   <div class="meta-item">
                     <i class="bi bi-buildings"></i>
-                    <span>DigitalCraft Solutions</span>
+                    <span id="pd-client"></span>
                   </div>
                 </div>
               </div>
 
-              <h2 class="project-title">Innovative Financial Dashboard App</h2>
-
-              <div class="project-website">
-                <i class="bi bi-link-45deg"></i>
-                <a href="#" target="_blank">projectwebsite.example.com</a>
-              </div>
+              <h2 class="project-title" id="pd-title"></h2>
 
               <div class="project-overview">
-                <p class="lead">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius tortor nibh, sit amet tempor nibh finibus et. Aenean eu enim justo. Vestibulum aliquam hendrerit molestie.
-                </p>
+                <p class="lead" id="pd-lead"></p>
 
                 <div class="accordion project-accordion" id="portfolio-details-projectAccordion">
                   <div class="accordion-item" data-aos="fade-up">
@@ -230,7 +190,7 @@
                     </h2>
                     <div id="portfolio-details-collapse-1" class="accordion-collapse collapse show" data-bs-parent="#portfolio-details-projectAccordion">
                       <div class="accordion-body">
-                        <p>Cras ultricies ligula sed magna dictum porta. Nulla quis lorem ut libero malesuada feugiat. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Pellentesque in ipsum id orci porta dapibus. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.</p>
+                        <p id="pd-overview"></p>
                       </div>
                     </div>
                   </div>
@@ -243,7 +203,7 @@
                     </h2>
                     <div id="portfolio-details-collapse-2" class="accordion-collapse collapse" data-bs-parent="#portfolio-details-projectAccordion">
                       <div class="accordion-body">
-                        <p>Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Sed porttitor lectus nibh.</p>
+                        <p id="pd-challenge"></p>
                       </div>
                     </div>
                   </div>
@@ -256,7 +216,7 @@
                     </h2>
                     <div id="portfolio-details-collapse-3" class="accordion-collapse collapse" data-bs-parent="#portfolio-details-projectAccordion">
                       <div class="accordion-body">
-                        <p>Donec sollicitudin molestie malesuada. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
+                        <p id="pd-solution"></p>
                       </div>
                     </div>
                   </div>
@@ -265,27 +225,12 @@
 
               <div class="project-features" data-aos="fade-up" data-aos-delay="300">
                 <h3><i class="bi bi-stars"></i> Key Features</h3>
-                <div class="row g-3">
-                  <div class="col-md-6">
-                    <ul class="feature-list">
-                      <li><i class="bi bi-check2-circle"></i> Real-time Data Visualization</li>
-                      <li><i class="bi bi-check2-circle"></i> User Role Management</li>
-                      <li><i class="bi bi-check2-circle"></i> Secure Authentication</li>
-                    </ul>
-                  </div>
-                  <div class="col-md-6">
-                    <ul class="feature-list">
-                      <li><i class="bi bi-check2-circle"></i> Customizable Dashboards</li>
-                      <li><i class="bi bi-check2-circle"></i> Data Export Options</li>
-                      <li><i class="bi bi-check2-circle"></i> Multi-device Support</li>
-                    </ul>
-                  </div>
-                </div>
+                <ul class="feature-list" id="pd-features"></ul>
               </div>
 
               <div class="cta-buttons" data-aos="fade-up" data-aos-delay="400">
-                <a href="#" class="btn-view-project">View Live Project</a>
-                <a href="#" class="btn-next-project">Next Project <i class="bi bi-arrow-right"></i></a>
+                <a href="index.html#portfolio" class="btn-view-project">Back to Portfolio</a>
+                <a href="#" id="pd-next" class="btn-next-project">Next Project <i class="bi bi-arrow-right"></i></a>
               </div>
             </div>
           </div>
@@ -296,29 +241,6 @@
     </section><!-- /Portfolio Details Section -->
 
   </main>
-
-  <footer id="footer" class="footer dark-background">
-
-    <div class="container">
-      <div class="copyright text-center ">
-        <p>© <span>Copyright</span> <strong class="px-1 sitename">Style</strong> <span>All Rights Reserved</span></p>
-      </div>
-      <div class="social-links d-flex justify-content-center">
-        <a href=""><i class="bi bi-twitter-x"></i></a>
-        <a href=""><i class="bi bi-facebook"></i></a>
-        <a href=""><i class="bi bi-instagram"></i></a>
-        <a href=""><i class="bi bi-linkedin"></i></a>
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you've purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
-    </div>
-
-  </footer>
 
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
@@ -334,6 +256,83 @@
   <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Project data: edit this to update the detail pages -->
+  <script>
+    const P = "assets/img/portfolio/";
+    const projects = {
+      "virbi": {
+        title: "Virtual Bicycle", category: "IoT Project", date: "", client: "",
+        image: ["virbi.png"], tech: ["IoT", "Sensors", "Cloud Dashboard"],
+        lead: "A prototype of a smart bicycle with sensor integration and cloud dashboard.",
+        overview: "A prototype of a smart bicycle with sensor integration and cloud dashboard.",
+        challenge: "TODO: describe the main challenge of this project.",
+        solution: "TODO: describe how you solved it.",
+        features: ["Sensor integration", "Cloud dashboard"]
+      },
+      "smart-home": {
+        title: "Smart Home", category: "AI / IoT", date: "", client: "",
+        image: ["iot.png"], tech: ["IoT", "AI Assistant", "Cloud"],
+        lead: "IoT smart home system with AI assistant and remote monitoring.",
+        overview: "IoT smart home system with AI assistant and remote monitoring.",
+        challenge: "TODO: describe the main challenge of this project.",
+        solution: "TODO: describe how you solved it.",
+        features: ["AI assistant", "Remote monitoring"]
+      },
+      "chatbot": {
+        title: "Chatbot Web Apps Using Agentic AI & RAG", category: "Web / AI", date: "", client: "",
+        image: ["chatbot.png"], tech: ["React", "FastAPI", "Docker", "Elasticsearch"],
+        lead: "Chatbot web apps leveraging React, FastAPI, Docker, and Elasticsearch for RAG.",
+        overview: "Chatbot web apps leveraging React, FastAPI, Docker, and Elasticsearch for RAG.",
+        challenge: "TODO: describe the main challenge of this project.",
+        solution: "TODO: describe how you solved it.",
+        features: ["Agentic AI", "Retrieval-Augmented Generation (RAG)", "Dockerized deployment"]
+      },
+      "personnel": {
+        title: "Personnel Management Web App", category: "Web Development", date: "", client: "Regional education office",
+        image: ["kcd.png"], tech: ["Laravel"],
+        lead: "Built with Laravel for regional education office personnel management.",
+        overview: "Built with Laravel for regional education office personnel management.",
+        challenge: "TODO: describe the main challenge of this project.",
+        solution: "TODO: describe how you solved it.",
+        features: ["Personnel data management"]
+      },
+      "aws": {
+        title: "AWS Cloud Data Analytics", category: "Cloud / Analytics", date: "", client: "",
+        image: ["data.png"], tech: ["QuickSight", "Bedrock", "EC2", "DynamoDB", "S3"],
+        lead: "Data analysis and infrastructure with Amazon QuickSight, Bedrock, EC2, DynamoDB, S3.",
+        overview: "Data analysis and infrastructure with Amazon QuickSight, Bedrock, EC2, DynamoDB, S3.",
+        challenge: "TODO: describe the main challenge of this project.",
+        solution: "TODO: describe how you solved it.",
+        features: ["Analytics dashboards", "Cloud infrastructure"]
+      }
+    };
+
+    (function () {
+      const ids = Object.keys(projects);
+      const id = new URLSearchParams(location.search).get("id");
+      if (!projects[id]) { location.replace("index.html#portfolio"); return; }
+      const d = projects[id];
+      const $ = (k) => document.getElementById("pd-" + k);
+      document.title = d.title + " - Rafly Adriansyah";
+      $("title").textContent = d.title;
+      $("category").textContent = d.category;
+      $("lead").textContent = d.lead;
+      $("overview").textContent = d.overview;
+      $("challenge").textContent = d.challenge;
+      $("solution").textContent = d.solution;
+      [["date", d.date], ["client", d.client]].forEach(([k, v]) => {
+        v ? ($(k).textContent = v) : $(k).closest(".meta-item").remove();
+      });
+      $("slides").innerHTML = d.image.map(f =>
+        '<div class="swiper-slide"><img src="' + P + f + '" alt="' + d.title + '" class="img-fluid"></div>').join("");
+      $("tech").innerHTML = d.tech.map(t => "<span>" + t + "</span>").join("");
+      $("features").innerHTML = d.features.map(f =>
+        '<li><i class="bi bi-check2-circle"></i> ' + f + "</li>").join("");
+      const next = ids[(ids.indexOf(id) + 1) % ids.length];
+      $("next").href = "portfolio-details.html?id=" + next;
+    })();
+  </script>
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
